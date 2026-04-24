@@ -1,0 +1,95 @@
+{
+  "name": "@pandelis/openui",
+  "version": "0.1.0",
+  "description": "Shadcn-compatible OpenAI and ChatGPT UI components, theme tokens, and registry artifacts.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Pandelis",
+  "homepage": "https://github.com/pandelisz/openui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandelisz/openui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pandelisz/openui/issues"
+  },
+  "keywords": [
+    "openai",
+    "chatgpt",
+    "shadcn",
+    "shadcn-ui",
+    "react",
+    "tailwindcss",
+    "ui-components"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "r",
+    "docs",
+    "registry.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./registry.json": "./registry.json",
+    "./r/*": "./r/*",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc -b",
+    "build:demo": "tsc -b && vite build",
+    "build:lib": "vite build -c vite.lib.config.ts && node -e \"import('node:fs/promises').then((fs)=>fs.copyFile('dist/index.css','dist/styles.css'))\" && tsc -p tsconfig.lib.json",
+    "registry:build": "npx shadcn@latest build registry.json --output ./r",
+    "build": "npm run typecheck && npm run build:lib && npm run registry:build",
+    "preview": "vite preview --host 127.0.0.1",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.11",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.555.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0 || ^19.0.0",
+    "react-dom": ">=18.2.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4"
+  }
+}
