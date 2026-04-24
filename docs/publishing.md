@@ -59,6 +59,22 @@ The workflow:
 - creates an npm `.tgz` with `npm pack`
 - uploads an `openui-compiled-<sha>` artifact containing `dist/`, `r/`, docs, metadata, and the tarball
 
+## GitHub Pages Demo
+
+The `.github/workflows/pages.yml` workflow deploys the Vite demo to GitHub Pages on every push to `main` and on manual dispatch.
+
+The demo build uses:
+
+```bash
+npm run build:pages
+```
+
+That script builds to `dist-pages/` with Vite's base path set to `/openui/`, so assets resolve correctly at:
+
+```text
+https://pandelisz.github.io/openui/
+```
+
 ## After Publish
 
 Verify npm package install:

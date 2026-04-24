@@ -54,6 +54,7 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc -b",
     "build:demo": "tsc -b && vite build",
+    "build:pages": "tsc -b && vite build --base=/openui/ --outDir=dist-pages",
     "build:lib": "vite build -c vite.lib.config.ts && node -e \"import('node:fs/promises').then((fs)=>fs.copyFile('dist/index.css','dist/styles.css'))\" && tsc -p tsconfig.lib.json",
     "registry:build": "npx shadcn@latest build registry.json --output ./r",
     "build": "npm run typecheck && npm run build:lib && npm run registry:build",

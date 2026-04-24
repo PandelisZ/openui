@@ -1,6 +1,7 @@
 # OpenUI
 
 [![Build](https://github.com/pandelisz/openui/actions/workflows/build.yml/badge.svg)](https://github.com/pandelisz/openui/actions/workflows/build.yml)
+[![Deploy Pages](https://github.com/pandelisz/openui/actions/workflows/pages.yml/badge.svg)](https://github.com/pandelisz/openui/actions/workflows/pages.yml)
 
 Shadcn-compatible React components for ChatGPT-style interfaces.
 
@@ -91,6 +92,7 @@ Useful scripts:
 ```bash
 npm run typecheck
 npm run build:demo
+npm run build:pages
 npm run build:lib
 npm run registry:build
 npm run pack:dry-run
@@ -99,6 +101,8 @@ npm run pack:dry-run
 ## GitHub Actions
 
 The `Build` workflow compiles the library, generates the shadcn registry files, packs the npm tarball, and uploads a downloadable `openui-compiled-<sha>` artifact containing `dist/`, `r/`, docs, metadata, and the `.tgz` package.
+
+The `Deploy Pages` workflow publishes the Vite demo to GitHub Pages at `https://pandelisz.github.io/openui/`.
 
 ## Documentation
 
