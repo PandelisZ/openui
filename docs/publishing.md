@@ -47,6 +47,18 @@ npm publish
 
 Publishing is an external action that changes npm state. Run it manually after reviewing the dry-run output.
 
+## GitHub Actions Artifact
+
+Every push to `main`, pull request, tag beginning with `v`, or manual workflow dispatch runs `.github/workflows/build.yml`.
+
+The workflow:
+
+- installs dependencies with `npm ci`
+- runs `npm run build`
+- runs `npm run pack:dry-run`
+- creates an npm `.tgz` with `npm pack`
+- uploads an `openui-compiled-<sha>` artifact containing `dist/`, `r/`, docs, metadata, and the tarball
+
 ## After Publish
 
 Verify npm package install:

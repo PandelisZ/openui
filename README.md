@@ -1,5 +1,7 @@
 # OpenUI
 
+[![Build](https://github.com/pandelisz/openui/actions/workflows/build.yml/badge.svg)](https://github.com/pandelisz/openui/actions/workflows/build.yml)
+
 Shadcn-compatible React components for ChatGPT-style interfaces.
 
 OpenUI ships in two forms:
@@ -93,6 +95,10 @@ npm run build:lib
 npm run registry:build
 npm run pack:dry-run
 ```
+
+## GitHub Actions
+
+The `Build` workflow compiles the library, generates the shadcn registry files, packs the npm tarball, and uploads a downloadable `openui-compiled-<sha>` artifact containing `dist/`, `r/`, docs, metadata, and the `.tgz` package.
 
 ## Documentation
 

@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Compile package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library and registry
+        run: npm run build
+
+      - name: Verify package contents
+        run: npm run pack:dry-run
+
+      - name: Create compiled npm tarball
+        run: |
+          npm pack --json > npm-pack.json
+          mkdir -p artifacts/package
+          cp -R dist r docs registry.json package.json README.md CHANGELOG.md LICENSE artifacts/package/
+          node --input-type=module <<'NODE'
+          import { copyFile, readFile } from "node:fs/promises";
+
+          const pack = JSON.parse(await readFile("npm-pack.json", "utf8"));
+          const filename = pack[0]?.filename;
+          if (!filename) {
+            throw new Error("npm pack did not return a tarball filename.");
+          }
+
+          await copyFile(filename, `artifacts/${filename}`);
+          NODE
+
+      - name: Upload compiled package
+        uses: actions/upload-artifact@v4
+        with:
+          name: openui-compiled-${{ github.sha }}
+          path: |
+            artifacts/package
+            artifacts/*.tgz
+            npm-pack.json
+          if-no-files-found: error
+          retention-days: 30
